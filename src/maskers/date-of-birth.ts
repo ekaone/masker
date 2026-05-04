@@ -3,7 +3,7 @@ import type { MaskOptions } from "../types/index.js";
 /**
  * Reveals only the year component, masks month and day.
  * "1990-07-15"  → "1990-**-**"
- * "07/15/1990"  → "**/**/1990"
+ * "07/15/1990"  → "xx/xx/1990"
  */
 export function maskDOB(value: string, opts: MaskOptions): string {
   const char = opts.char ?? "*";

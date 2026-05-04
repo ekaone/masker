@@ -12,7 +12,7 @@ export function maskAddress(value: string, opts: MaskOptions): string {
 
   if (parts.length < 2) return maskGeneric(value, opts);
 
-  const firstPart = parts[0].trim();
+  const firstPart = parts[0]!.trim();
   const numMatch = firstPart.match(/^\d+/);
   const num = numMatch ? numMatch[0] : "";
   const streetName = firstPart.slice(num.length).trim();

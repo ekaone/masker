@@ -13,8 +13,8 @@ export function maskJWT(value: string, opts: MaskOptions): string {
   return (
     parts[0] +
     "." +
-    char.repeat(parts[1].length) +
+    char.repeat(parts[1]!.length) +
     "." +
-    char.repeat(parts[2].length)
+    char.repeat(parts[2]!.length)
   );
 }

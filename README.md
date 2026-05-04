@@ -144,4 +144,10 @@ mask("4111 1111 1111 1111", { preserveFormat: false });
 
 ## License
 
-MIT © ekaone
+MIT © [Eka Prasetia](./LICENSE)
+
+## Links
+
+- [npm package](https://www.npmjs.com/package/@ekaone/masker)
+- [GitHub repository](https://github.com/ekaone/masker)
+- [Issue tracker](https://github.com/ekaone/masker/issues)

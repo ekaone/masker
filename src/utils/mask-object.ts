@@ -1,11 +1,6 @@
 import { mask } from "../core/mask.js";
-import type { MaskOptions, MaskType } from "../types/index.js";
+import type { MaskOptions, MaskType } from "../types/index.ts";
 
-/**
- * Key-name hints that bias type detection when a field name is recognized.
- * e.g. a field named "email" will be treated as type "email" before
- * auto-detection runs on the value itself.
- */
 const KEY_HINTS: Record<string, MaskType> = {
   email: "email",
   mail: "email",
@@ -34,32 +29,23 @@ const KEY_HINTS: Record<string, MaskType> = {
   address: "address",
 };
 
-/**
- * Mask all string fields in a plain object.
- * Field names bias type detection via KEY_HINTS.
- * Non-string values pass through untouched.
- *
- * @example
- * maskObject({ email: "alice@example.com", age: 30 })
- * // { email: "al***@example.com", age: 30 }
- *
- * maskObject({ apiKey: "sk-abc123xyz456abc", active: true })
- * // { apiKey: "sk-a***********abc", active: true }
- */
 export function maskObject<T extends Record<string, unknown>>(
   obj: T,
   options: MaskOptions = {},
 ): { [K in keyof T]: T[K] extends string ? string : T[K] } {
   const result: Record<string, unknown> = {};
-
   for (const [k, v] of Object.entries(obj)) {
     if (typeof v !== "string") {
       result[k] = v;
       continue;
     }
     const hint = KEY_HINTS[k.toLowerCase().replace(/[_\s-]/g, "")];
-    result[k] = mask(v, { ...options, type: hint ?? options.type }).masked;
+    const resolvedType = hint ?? options.type;
+    // Avoid spreading `type: undefined` — incompatible with exactOptionalPropertyTypes
+    const callOpts: MaskOptions = resolvedType
+      ? { ...options, type: resolvedType }
+      : { ...options };
+    result[k] = mask(v, callOpts).masked;
   }
-
   return result as { [K in keyof T]: T[K] extends string ? string : T[K] };
 }

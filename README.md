@@ -1,5 +1,3 @@
-# > Under Active Development
-
 # @ekaone/masker
 
 > Universal masking library — detects data type and applies appropriate masking automatically.

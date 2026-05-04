@@ -1,15 +1,15 @@
-import type { DetectionResult } from "../types/index.ts";
-import { emailRule } from "./email.ts";
-import { phoneRule } from "./phone.ts";
-import { creditCardRule } from "./credit-card.ts";
-import { ssnRule } from "./ssn.ts";
-import { ipAddressRule } from "./ip-address.ts";
-import { urlRule } from "./url.ts";
-import { jwtRule } from "./jwt.ts";
-import { apiKeyRule } from "./api-key.ts";
-import { ibanRule } from "./iban.ts";
-import { passportRule } from "./passport.ts";
-import { dateOfBirthRule } from "./date-of-birth.ts";
+import type { DetectionResult } from "../types/index.js";
+import { emailRule } from "./email.js";
+import { phoneRule } from "./phone.js";
+import { creditCardRule } from "./credit-card.js";
+import { ssnRule } from "./ssn.js";
+import { ipAddressRule } from "./ip-address.js";
+import { urlRule } from "./url.js";
+import { jwtRule } from "./jwt.js";
+import { apiKeyRule } from "./api-key.js";
+import { ibanRule } from "./iban.js";
+import { passportRule } from "./passport.js";
+import { dateOfBirthRule } from "./date-of-birth.js";
 
 /**
  * Ordered from most-specific to least-specific.
@@ -17,17 +17,17 @@ import { dateOfBirthRule } from "./date-of-birth.ts";
  * (e.g. JWT beats api_key for long base64url strings).
  */
 export const DETECTION_RULES = [
-  jwtRule,        // most specific: three-segment base64url
+  jwtRule, // most specific: three-segment base64url
   creditCardRule, // digit groups
-  ssnRule,        // ###-##-#### — checked before generic digit runs
-  emailRule,      // contains @
-  phoneRule,      // digit + separators
-  ipAddressRule,  // dotted quads / colons
-  ibanRule,       // alpha + digits, country-code prefix
-  passportRule,   // short alpha + digit sequence
-  dateOfBirthRule,// date patterns
-  urlRule,        // http(s):// prefix
-  apiKeyRule,     // catch-all long alphanumeric — lowest confidence, last
+  ssnRule, // ###-##-#### — checked before generic digit runs
+  emailRule, // contains @
+  phoneRule, // digit + separators
+  ipAddressRule, // dotted quads / colons
+  ibanRule, // alpha + digits, country-code prefix
+  passportRule, // short alpha + digit sequence
+  dateOfBirthRule, // date patterns
+  urlRule, // http(s):// prefix
+  apiKeyRule, // catch-all long alphanumeric — lowest confidence, last
 ] as const;
 
 /**

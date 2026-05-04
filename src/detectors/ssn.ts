@@ -1,4 +1,4 @@
-import type { DetectionRule } from "../types/index.ts";
+import type { DetectionRule } from "../types/index.js";
 
 export const ssnRule: DetectionRule = {
   type: "ssn",

@@ -1,4 +1,4 @@
-import type { MaskOptions } from "../types/index.ts";
+import type { MaskOptions } from "../types/index.js";
 
 /**
  * Reveals only the first 2 characters (country/type prefix), masks digits.

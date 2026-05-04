@@ -1,5 +1,5 @@
-import type { MaskOptions } from "../types/index.ts";
-import { maskGeneric } from "./generic.ts";
+import type { MaskOptions } from "../types/index.js";
+import { maskGeneric } from "./generic.js";
 
 /**
  * Masks the local part of an email address, preserving the domain.
@@ -18,5 +18,9 @@ export function maskEmail(value: string, opts: MaskOptions): string {
   }
 
   const revealStart = opts.revealStart ?? 2;
-  return local.slice(0, revealStart) + char.repeat(local.length - revealStart) + domain;
+  return (
+    local.slice(0, revealStart) +
+    char.repeat(local.length - revealStart) +
+    domain
+  );
 }

@@ -1,4 +1,4 @@
-import type { MaskOptions } from "../types/index.ts";
+import type { MaskOptions } from "../types/index.js";
 
 /**
  * Generic fallback: reveal first N and last N characters.

@@ -1,4 +1,4 @@
-import type { MaskOptions } from "../types/index.ts";
+import type { MaskOptions } from "../types/index.js";
 
 /**
  * Masks all but the last N digits, preserving separators.

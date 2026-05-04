@@ -1,5 +1,5 @@
-import type { MaskOptions } from "../types/index.ts";
-import { maskGeneric } from "./generic.ts";
+import type { MaskOptions } from "../types/index.js";
+import { maskGeneric } from "./generic.js";
 
 /**
  * Preserves scheme + host, masks path, query string, and credentials.

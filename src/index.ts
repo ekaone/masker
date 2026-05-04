@@ -19,7 +19,7 @@ export type {
 export { mask } from "./core/mask.js";
 
 // Detection (exposed for consumers who only need to identify, not mask)
-export { detect } from "./detectors/index.js";
+export { detect, DETECTION_RULES } from "./detectors/index.js";
 
 // Utilities
 export { maskObject } from "./utils/mask-object.js";

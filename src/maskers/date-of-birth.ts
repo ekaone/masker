@@ -1,4 +1,4 @@
-import type { MaskOptions } from "../types/index.ts";
+import type { MaskOptions } from "../types/index.js";
 
 /**
  * Reveals only the year component, masks month and day.

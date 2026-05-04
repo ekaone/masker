@@ -1,5 +1,5 @@
-import type { MaskOptions } from "../types/index.ts";
-import { maskGeneric } from "./generic.ts";
+import type { MaskOptions } from "../types/index.js";
+import { maskGeneric } from "./generic.js";
 
 /**
  * Keeps the street number and everything after the first comma
@@ -16,7 +16,8 @@ export function maskAddress(value: string, opts: MaskOptions): string {
   const numMatch = firstPart.match(/^\d+/);
   const num = numMatch ? numMatch[0] : "";
   const streetName = firstPart.slice(num.length).trim();
-  const maskedFirst = num + (num ? " " : "") + char.repeat(streetName.length || 3);
+  const maskedFirst =
+    num + (num ? " " : "") + char.repeat(streetName.length || 3);
 
   return [maskedFirst, ...parts.slice(1)].join(",");
 }

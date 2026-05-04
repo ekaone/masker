@@ -1,4 +1,4 @@
-import type { DetectionRule } from "../types/index.ts";
+import type { DetectionRule } from "../types/index.js";
 export const ibanRule: DetectionRule = {
   type: "iban",
   // Total length >= 15: 2 country + 2 check + min 11 BBAN. Excludes short passport-like strings.

@@ -1,4 +1,4 @@
-import type { MaskOptions } from "../types/index.ts";
+import type { MaskOptions } from "../types/index.js";
 
 /**
  * Reveals the first letter of each word, masks the rest.
@@ -9,7 +9,7 @@ export function maskName(value: string, opts: MaskOptions): string {
   return value
     .split(/\s+/)
     .map((word) =>
-      word.length <= 1 ? word : word[0] + char.repeat(word.length - 1)
+      word.length <= 1 ? word : word[0] + char.repeat(word.length - 1),
     )
     .join(" ");
 }

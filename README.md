@@ -44,7 +44,12 @@ mask("192.168.100.42");
 // { masked: "192.168.***.**, type: "ip_address", confidence: 0.93 }
 
 mask("eyJhbGci....eyJzdWI....SflKxw...");
-// { masked: "eyJhbGci....****....****", type: "jwt", confidence: 0.95 }
+// {
+//   original: 'eyJhbGci....eyJzdWI....SflKxw...',
+//   masked: 'eyJh************************w...',
+//   type: 'api_key',
+//   confidence: 0.6
+// }
 ```
 
 ## Supported Types
@@ -108,10 +113,10 @@ maskObject({
   age: 30,                      // non-strings are untouched
 });
 // {
-//   email: "al***@example.com",
-//   phone: "***-***-4567",
-//   apiKey: "sk-a***********c",
-//   age: 30,
+//   email: 'al***@example.com',
+//   phone: '***-***-4567',
+//   apiKey: 'sk-a**********6abc',
+//   age: 30
 // }
 ```
 
@@ -121,7 +126,7 @@ Sanitize sensitive tokens found inside a free-form string. Useful for log scrubb
 
 ```ts
 maskString("Request from user@example.com at 192.168.1.1 token=sk-abc123def456");
-// "Request from us***@example.com at 192.168.***.* token=sk-a*******56"
+// "Request from us**@example.com at 192.168.*.* token=sk-a*******f456"
 ```
 
 ## Options Examples

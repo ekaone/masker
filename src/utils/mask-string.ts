@@ -1,24 +1,21 @@
 import { mask } from "../core/mask.js";
-import type { MaskOptions } from "../types/index.js";
+import type { MaskOptions } from "../types/index.ts";
 
 /**
- * Token patterns to find sensitive values in free-form text, ordered by specificity:
+ * Token patterns ordered by specificity:
  * 1. Email addresses
  * 2. SSNs              ###-##-####
  * 3. Phone numbers     ###-###-#### variants
- * 4. Long digit runs   credit cards, account numbers
- * 5. URLs              https://...
- * 6. Long alphanumeric API keys / tokens (20+ chars)
- *
- * NOTE: The api_key segment uses a lookahead/lookbehind instead of \b because
- * tokens containing hyphens (e.g. sk-proj-...) have a non-word char at the
- * boundary, which causes \b to silently fail.
+ * 4. IPv4 addresses    dotted-quad (before long digit runs to avoid partial match)
+ * 5. Long digit runs   credit cards, account numbers (12+ digits)
+ * 6. URLs              https://...
+ * 7. Alphanumeric keys 12+ chars — lookbehind blocks \w prefix, allows = prefix
+ *    so "token=sk-abc..." correctly captures "sk-abc..." not "abc..."
  */
 const TOKEN_PATTERN =
-  /(?:[^\s,;()\[\]{}'"`]+@[^\s,;()\[\]{}'"`]+)|(?:\b\d{3}-\d{2}-\d{4}\b)|(?:\b\d{3}[-.\s]\d{3}[-.\s]\d{4}\b)|(?:\b\d[\d\s\-]{10,}\d\b)|(?:https?:\/\/[^\s]+)|(?:(?<![=\w])[A-Za-z0-9_\-]{20,}(?![=\w]))/g;
+  /(?:[^\s,;()\[\]{}'"`]+@[^\s,;()\[\]{}'"`]+)|(?:\b\d{3}-\d{2}-\d{4}\b)|(?:\b\d{3}[-.\s]\d{3}[-.\s]\d{4}\b)|(?:\b(?:\d{1,3}\.){3}\d{1,3}\b)|(?:\b\d[\d\s\-]{10,}\d\b)|(?:https?:\/\/[^\s]+)|(?:(?<!\w)[A-Za-z0-9_\-]{12,}(?!\w))/g;
 
-// Set to 0.60 to include api_key (confidence: 0.60) — maskString is a
-// log sanitizer where aggressive masking is preferable to missed tokens.
+// Matches api_key confidence (0.60) — log sanitizer should be aggressive
 const MIN_CONFIDENCE = 0.6;
 
 export function maskString(text: string, options: MaskOptions = {}): string {

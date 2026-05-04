@@ -1,6 +1,6 @@
 {
   "name": "@ekaone/masker",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Universal masking library, detects data type and applies appropriate masking automatically. Zero dependencies. TypeScript-native.",
   "keywords": [
     "mask",
@@ -27,14 +27,14 @@
     "node": ">=18"
   },
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "publishConfig": {
@@ -46,7 +46,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "pnpm typecheck && pnpm tsup",
+    "build": "pnpm typecheck && pnpm clean && pnpm tsup",
     "dev": "tsx src/cli.ts",
     "watch": "tsup --watch",
     "clean": "rimraf dist",
